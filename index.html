@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
+  <title>Etch-A-Sketch</title>
+</head>
+<body>
+  <script>
+      const buttonDiv = document.createElement("div");
+      buttonDiv.style.display = "flex";
+      buttonDiv.style.justifyContent = "space-around";
+      const reset = document.createElement("button");
+      reset.innerHTML = "Reset Grid";
+      buttonDiv.appendChild(reset);
+      document.body.appendChild(buttonDiv);
+
+      const container = document.createElement("div");
+      container.id = "container";
+      container.style.margin = "0 auto";
+      container.style.width = "90vw";
+      container.style.maxWidth = "89vh";
+      container.style.height = "90vw";
+      container.style.maxHeight = "89vh";
+      container.style.fontSize = "1rem";
+      document.body.appendChild(container);
+
+      let i, j;
+      let x = 0;
+      const toAdd = document.createDocumentFragment();
+
+      for (i=0; i<4; i++) {
+        const row = document.createElement("div");
+        row.className = "row";
+        toAdd.appendChild(row);
+        for (j=x; j<x+4; j++) {
+          const box = document.createElement("div");
+          box.className = "box";
+          const inner = document.createElement("div");
+          inner.className = "inner";
+          inner.id = "inner" + j;
+          box.appendChild(inner);
+          row.appendChild(box);
+        }
+        x = j;
+      }
+      document.getElementById("container").appendChild(toAdd);
+
+            for (i=0; i<j; i++) {
+        document.getElementById("inner" + i).addEventListener ("mouseover", function(e) {
+          this.style.backgroundColor = "black";
+        });
+      }
+
+      let numBoxes;
+      
+      buttonDiv.addEventListener("click", function() {
+        let remEl = document.getElementById("container");
+        remEl.remove();
+      });
+
+      function setBoxes() {
+        numBoxes = prompt("How many squares per side would you like the grid to be?");
+        return numBoxes;
+      }
+      
+      buttonDiv.addEventListener("click", setBoxes);
+
+      buttonDiv.addEventListener("click", function() {
+        const container = document.createElement("div");
+        container.id = "container";
+        container.style.margin = "0 auto";
+        container.style.width = "90vw";
+        container.style.maxWidth = "89vh";
+        container.style.height = "90vw";
+        container.style.maxHeight = "89vh";
+        container.style.fontSize = "1rem";
+        document.body.appendChild(container);
+
+        let y = 0;
+        for (i=0; i<numBoxes; i++) {
+          const row = document.createElement("div");
+          row.classList = "row";
+          toAdd.appendChild(row);
+          for (j=0; j<numBoxes; j++) {
+            const box = document.createElement("div");
+            box.classList = "box";
+            row.appendChild(box);
+            box.addEventListener ("mouseover", function() {
+              box.style.backgroundColor = "black";
+            })
+          }
+        }
+        document.getElementById("container").appendChild(toAdd);
+      }); 
+
+  </script>
+</body>
+</html>
